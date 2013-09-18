@@ -1,14 +1,68 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Docking@Home Job Submission</title>
+        <meta name = 'description' content = 'Docking@Home Job Submission'/>
+        <meta name = 'author' content = 'Millersville University'/>
+        <meta name = 'viewport' content = 'width=device-width'>
+        <meta http-equiv = 'content-type' content='text/html; charset=UTF-8'>
+
+        <!-- css files -->
+        <link rel = 'stylesheet' type = 'text/css' href = 'src/css/JobSubmission.css'> 
+        
+        <!-- js lib files -->
+        <script src='libs/three.js'></script>
+        <script src='libs/jQuery.js'></script>
+        <script src='libs/md5-min.js'></script>
+
+        <!--js framework files-->
+        <script src='framework/src/Application.js'></script>
+        <script src='framework/src/CommunicationManager.js'></script>
+        <script src='framework/src/CookieManager.js'></script>
+        <script src='framework/src/Exceptions.js'></script>
+        <script src='framework/src/TextLoader.js'></script>
+        <script src='framework/src/Game.js'></script>
+        <script src='framework/src/Map.js'></script>
+        <script src='framework/src/MouseManager.js'></script>
+        <script src='framework/src/Timer.js'></script>  
+        <script src='framework/src/Screen.js'></script>
+        <script src='framework/src/Iterator.js'></script>
+
+        <!--js Job Submission files-->
+        <script src='src/js/JobSubmission.js'></script>
+
+        <script>
+            $(function( ) {
+                /* Initial Code */
+            });
+        </script>
     </head>
     <body>
-        <div>TODO write content</div>
+        <div id = 'container'>
+
+            <div id = 'pageHeader'>
+                <a href = 'http://gcl.cis.udel.edu/mailman/listinfo/exscitech' target = '_blank'>
+                    <img class = 'headerLogo' id = 'exscitechLogo' src = 'res/media/exscitech_logo.png'>
+                </a>
+                <a href = 'http://docking.cis.udel.edu/' target = '_blank'>
+                    <img class = 'headerLogo' id = 'dockingLogo' src = 'res/media/dh_logo.png'>
+                </a>
+                <div id = 'exscitechLinks'>
+                    <a class = 'headerLinks' href = ''> Job Submission </a> | 
+                    <a class = 'headerLinks' href = ''> Molecule Flashcards </a> | 
+                    <a class = 'headerLinks' href = 'http://docking.cis.udel.edu/about/project/staff.php'> Contributors </a> | 
+                    <a class = 'headerLinks' href = 'http://docking.cis.udel.edu/'> Docking@Home </a>
+
+                    <a class = 'headerLinks' id = 'logoutButton' data-logic = 'logout'>
+                        <!-- User's Name -->
+                    </a>
+                </div>
+            </div>
+
+            <div class = 'screen active fade in'>
+                Test Content
+            </div>
+
+        </div>
     </body>
 </html>

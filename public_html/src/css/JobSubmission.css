@@ -1,0 +1,180 @@
+/* Main Components */
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #EBFBFF;
+    font-family: Tahoma, Geneva, sans-serif;
+    /* user-select: none;*/ /* Note: If this ever gets spec, you can uncomment this */
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+}
+
+/* Parent Div Elements */
+
+#container {
+    width: 1004px;
+    height: 604px;
+    margin: auto;
+}
+
+#pageHeader {
+    background-color: #002AA8;
+    background: linear-gradient( to bottom, #29368C 5%, #37C1F0 );
+    padding-bottom: 5px;
+}
+
+#exscitechLinks {
+    color: white;
+    text-align: center;
+    font-size: 14px;
+}
+
+#dockingLogo {
+    float: right;
+}
+
+.headerLogo{
+    height: 100px;
+}
+
+/* Component Classes */
+
+div.button {
+    text-align: center;
+    background-color: #4D4D62;
+    margin: 20px;
+    padding: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition-property: background-color, color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+}
+
+div.button:hover {
+    background-color: #363645;
+}
+
+div.button:active {
+    background-color: #363645;
+}
+
+.button.blueButton {
+    color: #EEE;
+    background-color: #002AA8;
+}
+
+.button.blueButton:hover {
+    color: #CCC;
+    background-color: #001D75;
+}
+
+.screen {
+    height: 600px;
+    width: 1000px;
+    border: 2px solid #010120;
+    background-color: #CCCCCC;
+    position: absolute;
+    display: block;
+}
+
+/* Text and Headings and Links */
+
+h1 {
+    font-size: 72px;
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.screen h1, .screen h2 {
+    text-align: center;
+}
+
+a.headerLinks:link {
+    color: white;
+    text-decoration: none;
+    transition-property: color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+}
+
+a.headerLinks:visited {
+    color: white;
+    text-decoration: none;
+    transition-property: color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+}
+
+a.headerLinks:hover {
+    color: #262626;
+    text-decoration: underline;
+}
+
+p.errorText {
+    font-size: 22px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#logoutButton {
+    position: absolute;
+    width: 250px;
+    margin-left: 20px;
+    text-align: right;
+    transition-property: color;
+    transition-duration: 0.3s;
+    transition-delay: 0s;
+}
+
+#logoutButton:hover {
+    cursor: pointer;
+}
+
+/* Transition classes */
+
+.fade {
+    opacity: 0;
+    transition: opacity 0.5s linear;
+}
+
+.fade.in {
+    opacity: 1;
+}
+
+.slide {
+    opacity: 1;
+    overflow: hidden;
+    transition: all 0.3s linear;
+    transition-property: height, padding, border;
+}
+
+/* TODO: May be a cleaner way to do this without using !important. */
+.slide.up {
+    height: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    border-top-width: 0 !important;
+    border-bottom-width: 0 !important;
+}
+
+.active {
+    z-index: 1;
+}
+
+.activeTop {
+    z-index: 2;
+}
+
+.hide {
+    display: none;
+}
+
+.hide.active {
+    display: block;
+}
