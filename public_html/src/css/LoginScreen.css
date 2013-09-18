@@ -1,0 +1,68 @@
+#loginBox {
+    height: 240px;
+}
+
+#registerBox {
+    height: 320px;
+}
+
+.inputContainer {
+    margin: 50px auto;
+    width: 400px;
+    text-align: center;
+}
+
+.inputBox {
+    height: 300px;
+    padding: 10px;
+    background-color: white;
+    border: 2px solid black;
+}
+
+h1.inputContainer {
+    text-align: center;
+}
+
+a.basicLink {
+    color: blue;
+    display: inline;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a.basicLink:hover {
+    text-decoration: underline;
+}
+
+span.error {
+    color: red;
+}
+
+span.good {
+    color: green;
+}
+
+.inputBox .button { 
+    margin: 10px auto;
+    max-width: 100px;
+}
+
+.inputBox form {
+    width: 100%;
+}
+
+.inputBox label, .inputBox input {
+    display: inline-block;
+}
+
+.inputBox label {
+    clear: both;
+    margin: 6px auto;
+    text-align: right;
+    width: 95%;
+}
+
+.inputBox label input {
+    width: 55%;
+    margin-left: 10px;
+}

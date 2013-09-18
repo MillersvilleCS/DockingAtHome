@@ -13,7 +13,7 @@ body {
 
 /* Parent Div Elements */
 
-#container {
+#wrapper {
     width: 1004px;
     height: 604px;
     margin: auto;
