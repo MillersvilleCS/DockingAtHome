@@ -1,0 +1,15 @@
+.overlay {
+    position: absolute;
+    z-index: 2;
+}
+
+.sidebar {
+    width: 200px;
+    height: 600px;
+    background-color: green;
+}
+
+.sidebar.panel {
+    margin-left: 0px;
+    background-color: red;
+}

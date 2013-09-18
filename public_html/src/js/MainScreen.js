@@ -4,6 +4,29 @@
 
     var MainScreen = function($element) {
         Screen.apply(this, [$element]);
+
+        var pointLight = new THREE.PointLight(0xFFFFFF);
+        pointLight.position.set(0, 0, 130);
+        this.scene.add(pointLight);
+
+        /* TODO - Remove Temp */
+
+        var sphereMaterial =
+          new THREE.MeshLambertMaterial(
+            {
+              color: 0xCC0000
+            });
+
+        var sphere = new THREE.Mesh(
+
+          new THREE.SphereGeometry(
+            1,
+            20,
+            20),
+
+          sphereMaterial);
+
+        this.scene.add(sphere);
     };
 
     MainScreen.prototype = Object.create(Screen.prototype);
@@ -26,13 +49,19 @@
         $('#mainUI').addClass('in active');
     };
 
-    function enableButtons(resultScreen) {
-
+    function enableButtons(mainScreen) {
+        $('#sidebar').find('.button[data-logic=\'test\']').on('click', function() {
+            if( $('#sidebarPanel').hasClass('left') ) {
+                $('#sidebarPanel').removeClass('left');
+            } else  {
+                $('#sidebarPanel').addClass('left');
+            }
+        });
     }
 
     function disableButtons( ) {
 
     }
 
-    window.MainScreen =MainScreen;
+    window.MainScreen = MainScreen;
 })(window, jQuery);

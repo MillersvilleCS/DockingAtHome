@@ -72,7 +72,7 @@
                 camera.lookAt(new THREE.Vector3 (0, 0, 0));
                 var game = new JobSubmission( );
                 var application = new Application(game, camera, 'Job Submission', WIDTH, HEIGHT);
-                //application.performGameLoop( );
+                application.performGameLoop( );
             });
         </script>
     </head>
@@ -159,10 +159,22 @@
             </div>
 
             <div id = 'mainUI' class = 'screen fade'>
-                Main Page
-                <!-- temp, TODO -->
-                <div id = 'container' style = 'display: none'>
 
+                <!-- Div elements in this order so pop-out is behind main panel -->
+                <div id = 'sidebarPanel' class = 'overlay sidebar panel slide'>
+                    Sub Components Pop-Out
+                </div>
+
+                <div id = 'sidebar' class = 'overlay sidebar'>
+                    Main Components
+                    <div class = 'button'
+                         data-logic = 'test'>
+                        Test - Press Me!
+                    </div>
+                </div>
+
+                <div id = 'container'>
+                    <!-- Canvas added dynamically -->
                 </div>
             </div>
 
