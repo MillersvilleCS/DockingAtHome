@@ -168,7 +168,7 @@ p.errorText {
     border-bottom-width: 0 !important;
 }
 /* TODO: Keep left here or move to MainScreen css? */
-.slide.left {
+.slide.right {
     margin-left: 200px !important;
 }
 

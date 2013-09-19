@@ -51,10 +51,10 @@
 
     function enableButtons(mainScreen) {
         $('#sidebar').find('.button[data-logic=\'test\']').on('click', function() {
-            if( $('#sidebarPanel').hasClass('left') ) {
-                $('#sidebarPanel').removeClass('left');
+            if( $('#sidebarPanel').hasClass('right') ) {
+                $('#sidebarPanel').removeClass('right');
             } else  {
-                $('#sidebarPanel').addClass('left');
+                $('#sidebarPanel').addClass('right');
             }
         });
     }
