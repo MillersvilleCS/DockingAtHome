@@ -50,12 +50,13 @@
     };
 
     function enableButtons(mainScreen) {
-        $('#sidebar').find('.button[data-logic=\'test\']').on('click', function() {
-            if( $('#sidebarPanel').hasClass('right') ) {
-                $('#sidebarPanel').removeClass('right');
-            } else  {
-                $('#sidebarPanel').addClass('right');
-            }
+        $('#sidebar').find('.button[data-logic=\'mainElement\']').on('click', function() {
+            //do logic for setting submenu html, and getting which button was selected
+            $('#sidebarPanel').addClass('right');
+        });
+
+        $('#sidebarPanel').find('.button[data-logic=\'subElement\']').on('click', function() {
+            $('#sidebarPanel').removeClass('right');
         });
     }
 

@@ -6,10 +6,18 @@
 .sidebar {
     width: 200px;
     height: 600px;
-    background-color: green;
+    background-color: #CCCCCC;
+    font-size: 24px;
+    border-right: 2px solid #010120;
+    overflow-y: auto;
 }
 
 .sidebar.panel {
     margin-left: 0px;
-    background-color: red;
+}
+
+.button.sidebarElement {
+    background-color: transparent;
+    border-radius: 0px;
+    margin: 0px;
 }
