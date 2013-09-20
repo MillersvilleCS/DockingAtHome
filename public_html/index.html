@@ -98,6 +98,26 @@
                 </div>
             </div>
 
+            <div id = 'errorMessage' class = 'screen fade'>
+                <h1>Oops!</h1>
+                <p class = 'errorText'>
+                    Looks like an error has occurred! Make sure you are
+                    connected to the internet, including logging in to
+                    the wifi (if necessary).
+                </p>
+                <p class = 'errorText'>
+                    If this problem persists, contact <span id = 'contact'></span>, 
+                    and let him know Error <span id = 'errorCode'>404</span> has occurred.
+                </p>
+                <p class = 'errorText'>
+                    Press the button below to try again. <span id = 'retryCount'></span>
+                </p>
+                <div class = 'button blueButton errorButton'
+                     data-logic = 'retry'>
+                    Retry Connection
+                </div>
+            </div>
+
             <!-- Imported from Molecule Flashcards -->
             <div id = 'loginUI' class = 'screen fade'>
                 <h1>Job Submission</h1>
