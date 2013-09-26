@@ -12,12 +12,20 @@
     overflow-y: auto;
 }
 
-.sidebar.panel {
-    margin-left: 0px;
-}
-
 .button.sidebarElement {
     background-color: transparent;
     border-radius: 0px;
     margin: 0px;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+#sidebarPanel {
+    margin-left: 0px;
+}
+
+#sidebarSecondPanel {
+    margin-left: 202px;
 }

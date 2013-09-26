@@ -180,7 +180,18 @@
             <div id = 'mainUI' class = 'screen fade'>
 
                 <!-- Div elements in this order so pop-out is behind main panel -->
-                <div id = 'sidebarPanel' class = 'overlay sidebar panel slide'>
+                <div id = 'sidebarSecondPanel' class = 'overlay sidebar slide hidden'>
+                    <div class = 'button sidebarElement'
+                         data-logic = 'subElement'>
+                         Sub-Sub-Element
+                    </div>
+                    <div class = 'button sidebarElement'
+                         data-logic = 'subElement'>
+                         Sub-Sub-Element
+                    </div>
+                </div>
+
+                <div id = 'sidebarPanel' class = 'overlay sidebar slide'>
                     <!--Dynamically Added Later -->
                     <div class = 'button sidebarElement'
                          data-logic = 'subElement'>

@@ -172,6 +172,10 @@ p.errorText {
     margin-left: 202px !important;
 }
 
+.slide.furtherRight {
+    margin-left: 404px !important;
+}
+
 .active {
     z-index: 1;
 }

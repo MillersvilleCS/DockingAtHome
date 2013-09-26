@@ -47,6 +47,14 @@
     MainScreen.prototype.onResume = function( ) {
         enableButtons(this);
         $('#mainUI').addClass('in active');
+
+        JSCommunicationManager.startGame(UserData.auth, this.setInfo.bind(this));
+    };
+
+    MainScreen.prototype.setInfo = function( response ) {
+        console.log( 'We should store this information in 3 pop-out windows, protein -> ligand -> conformation' );
+        console.log( 'Ligand list contains conformation list' );
+        console.log( response );
     };
 
     function enableButtons(mainScreen) {
@@ -56,6 +64,14 @@
         });
 
         $('#sidebarPanel').find('.button[data-logic=\'subElement\']').on('click', function() {
+            $('#sidebarSecondPanel').removeClass('hidden');
+            /* TODO - Better way to always move 202px from current margin-left? */
+            $('#sidebarSecondPanel').addClass('furtherRight');
+        });
+
+        $('#sidebarSecondPanel').find('.button[data-logic=\'subElement\']').on('click', function() {
+            $('#sidebarSecondPanel').removeClass('furtherRight');
+            $('#sidebarSecondPanel').addClass('hidden');
             $('#sidebarPanel').removeClass('right');
         });
     }
