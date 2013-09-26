@@ -2,7 +2,7 @@ JSCommunicationManager = function () {
     
 };
 
-JSCommunicationManager.REQUEST_HANDLER_URL = 'http://docktest.gcl.cis.udel.edu/exscitech_sam/request_handler.php';
+JSCommunicationManager.REQUEST_HANDLER_URL = 'http://docktest.gcl.cis.udel.edu/jobSubmission/public_html/request_handler.php';
 JSCommunicationManager.GET_MEDIA_URL = 'http://docktest.gcl.cis.udel.edu/exscitech_sam/get_media.php';
 JSCommunicationManager.MEDIA_PDB = 0;
 JSCommunicationManager.MEDIA_IMAGE = 1;
