@@ -57,7 +57,7 @@
         JSCommunicationManager.startGame(UserData.auth, this.setInfo.bind(this));
     };
 
-    MainScreen.prototype.setInfo = function( response ) {);
+    MainScreen.prototype.setInfo = function( response ) {
         console.log( response );
 
         this.proteinList = response.protein_list;
