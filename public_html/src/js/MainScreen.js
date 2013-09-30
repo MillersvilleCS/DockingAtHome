@@ -33,7 +33,10 @@
         this.buttonHistory = [];
     };
 
-    var SIDEBAR_HTML = "<div id='$index' class='button sidebarElement' data-logic='$id'>$name</div>";
+    var SIDEBAR_HTML = "<div id='$index' class='button sidebarElement protein' data-logic='$id'><b>$name</b>" +
+                       "<div class='description'>Disease: $disease<br><span class='descriptionLink' " + 
+                       "data-logic='$did'>View Description</span></div></div>";
+    var SIDEBAR_PANEL_HTML = "<div id='$index' class='button sidebarElement' data-logic='$id'>$name</div>";
 
     MainScreen.prototype = Object.create(Screen.prototype);
     MainScreen.prototype.constructor = MainScreen;
@@ -64,14 +67,17 @@
         this.ligandList = response.ligand_list;
 
         $('#sidebar').html("<h2 class='sidebarTitle'>Protein</h2>");
-        this.proteinList.forEach(function(protein) {
+       for(var i = 0; i < this.proteinList.length; i++) {
             insertInfo(
                 {
-                    '$index': 's' + protein.id,
-                    '$id': protein.id, 
-                    '$name': protein.name
+                    '$index': 's' + i,
+                    '$id': i, 
+                    '$name': this.proteinList[i].name,
+                    '$description': this.proteinList[i].description,
+                    '$did': 'd' + i,
+                    '$disease': this.proteinList[i].disease
                 }, SIDEBAR_HTML, '#sidebar');
-        });
+        }
 
         $('#sidebarPanel').html("<h2 class='sidebarTitle'>Ligand</h2>");
         for(var i = 0; i < this.ligandList.length; i++) {
@@ -80,7 +86,7 @@
                     '$index': 'sp' + i,
                     '$id': i, 
                     '$name': this.ligandList[i].name
-                }, SIDEBAR_HTML, '#sidebarPanel');
+                }, SIDEBAR_PANEL_HTML, '#sidebarPanel');
         }
     };
 
@@ -120,6 +126,16 @@
     }
 
     function enableButtons(mainScreen) {
+        $('#sidebar').on('click', '.descriptionLink[data-logic]', function() {
+            // TODO - proper screen
+            var selected = $(this).data('logic');
+            selected = selected.substr(1, selected.length - 1);
+            var index = parseInt(selected);
+            alert(mainScreen.proteinList[index].description);
+
+            return false;//cancel action
+        });
+
         $('#sidebar').on('click', '.button[data-logic]', function() {
             $('#sidebarPanel').addClass('right');
             mainScreen.changeSelected('#s', $(this).data('logic'));
@@ -137,7 +153,7 @@
                         '$index': 'ssp' + selected + "" + i,
                         '$id': selected + "" + i, 
                         '$name': conformList[i].id
-                    }, SIDEBAR_HTML, '#sidebarSecondPanel');
+                    }, SIDEBAR_PANEL_HTML, '#sidebarSecondPanel');
             }
             mainScreen.reselect('#ssp');
 

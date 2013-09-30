@@ -1,6 +1,17 @@
 h2.sidebarTitle {
     padding-bottom: 15px;
+    padding-top: 15px;
+    margin: 0px;
     border-bottom: 2px solid black;
+}
+
+.descriptionLink {
+    /* None */
+}
+
+.descriptionLink:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .overlay {
@@ -17,10 +28,20 @@ h2.sidebarTitle {
     overflow-y: auto;
 }
 
+.description {
+    font-size: 16px;
+    text-align: left;
+    padding-top: 10px;
+}
+
 .button.sidebarElement {
     background-color: transparent;
     border-radius: 0px;
     margin: 0px;
+}
+
+.button.sidebarElement.protein {
+    border-bottom: 2px solid black;
 }
 
 .selected {
