@@ -27,7 +27,13 @@
           sphereMaterial);
 
         this.scene.add(sphere);
+
+        this.proteinList = undefined;
+        this.ligandList = undefined;
+        this.buttonHistory = [];
     };
+
+    var SIDEBAR_HTML = "<div id='$index' class='button sidebarElement' data-logic='$id'>$name</div>";
 
     MainScreen.prototype = Object.create(Screen.prototype);
     MainScreen.prototype.constructor = MainScreen;
@@ -51,25 +57,97 @@
         JSCommunicationManager.startGame(UserData.auth, this.setInfo.bind(this));
     };
 
-    MainScreen.prototype.setInfo = function( response ) {
-        console.log( 'We should store this information in 3 pop-out windows, protein -> ligand -> conformation' );
-        console.log( 'Ligand list contains conformation list' );
+    MainScreen.prototype.setInfo = function( response ) {);
         console.log( response );
-    };
 
-    function enableButtons(mainScreen) {
-        $('#sidebar').find('.button[data-logic=\'mainElement\']').on('click', function() {
-            //do logic for setting submenu html, and getting which button was selected
-            $('#sidebarPanel').addClass('right');
+        this.proteinList = response.protein_list;
+        this.ligandList = response.ligand_list;
+
+        $('#sidebar').html("<h2 class='sidebarTitle'>Protein</h2>");
+        this.proteinList.forEach(function(protein) {
+            insertInfo(
+                {
+                    '$index': 's' + protein.id,
+                    '$id': protein.id, 
+                    '$name': protein.name
+                }, SIDEBAR_HTML, '#sidebar');
         });
 
-        $('#sidebarPanel').find('.button[data-logic=\'subElement\']').on('click', function() {
+        $('#sidebarPanel').html("<h2 class='sidebarTitle'>Ligand</h2>");
+        for(var i = 0; i < this.ligandList.length; i++) {
+            insertInfo(
+                {
+                    '$index': 'sp' + i,
+                    '$id': i, 
+                    '$name': this.ligandList[i].name
+                }, SIDEBAR_HTML, '#sidebarPanel');
+        }
+    };
+
+    MainScreen.prototype.changeSelected = function(type, id) {
+        for(var i = 0; i < this.buttonHistory.length; i++) {
+            if(this.buttonHistory[i].type == type) {
+                $(type + this.buttonHistory[i].id).removeClass('selected');
+                this.buttonHistory.splice(i, 1);
+                break;
+            }
+        }
+        this.buttonHistory.push(
+                {
+                    type: type,
+                    id: id
+                }
+            );
+        $(type + id).addClass('selected');
+    };
+
+    MainScreen.prototype.reselect = function( type ) {
+        this.buttonHistory.forEach(function(history) {
+            if(type == history.type) {
+                $(type + history.id).addClass('selected');
+            }
+        });
+    };
+
+    /* TODO: Keep private function here? */
+    function insertInfo(replacements, templateString, selector) {
+        var result = templateString;
+        for(var key in replacements) {
+            result = result.replace(key, replacements[key]);
+        }
+
+        $(selector).append(result);
+    }
+
+    function enableButtons(mainScreen) {
+        $('#sidebar').on('click', '.button[data-logic]', function() {
+            $('#sidebarPanel').addClass('right');
+            mainScreen.changeSelected('#s', $(this).data('logic'));
+        });
+
+        $('#sidebarPanel').on('click', '.button[data-logic]', function() {
+            var selected = $(this).data('logic');
+            mainScreen.changeSelected('#sp', selected);
+
+            $('#sidebarSecondPanel').html("<h2 class='sidebarTitle'>Conformation</h2>");
+            var conformList = mainScreen.ligandList[selected].conformation_list;
+            for(var i = 0; i < conformList.length; i++) {
+                insertInfo(
+                    {
+                        '$index': 'ssp' + selected + "" + i,
+                        '$id': selected + "" + i, 
+                        '$name': conformList[i].id
+                    }, SIDEBAR_HTML, '#sidebarSecondPanel');
+            }
+            mainScreen.reselect('#ssp');
+
             $('#sidebarSecondPanel').removeClass('hidden');
             /* TODO - Better way to always move 202px from current margin-left? */
             $('#sidebarSecondPanel').addClass('furtherRight');
         });
 
-        $('#sidebarSecondPanel').find('.button[data-logic=\'subElement\']').on('click', function() {
+        $('#sidebarSecondPanel').on('click', '.button[data-logic]', function() {
+            mainScreen.changeSelected('#ssp', $(this).data('logic'));
             $('#sidebarSecondPanel').removeClass('furtherRight');
             $('#sidebarSecondPanel').addClass('hidden');
             $('#sidebarPanel').removeClass('right');

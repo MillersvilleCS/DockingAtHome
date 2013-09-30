@@ -1,3 +1,8 @@
+h2.sidebarTitle {
+    padding-bottom: 15px;
+    border-bottom: 2px solid black;
+}
+
 .overlay {
     position: absolute;
     z-index: 2;
@@ -16,6 +21,11 @@
     background-color: transparent;
     border-radius: 0px;
     margin: 0px;
+}
+
+.selected {
+    color: white;
+    background-color: #002AA8 !important;
 }
 
 .hidden {
