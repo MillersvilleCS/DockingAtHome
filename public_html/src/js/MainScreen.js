@@ -32,11 +32,10 @@
 
         this.proteinList = undefined;
         this.ligandList = undefined;
-        this.buttonHistory = [];
         this.currentProtein = undefined;
         this.currentLigand = undefined;
         this.currentTypePlaced = undefined;
-        this.selected = [-1, -1, -1];
+        this.selected = [-1, -1, -1, -1];//protein, ligand, conformation, ligand associated with conformation
     };
 
     var SIDEBAR_HTML = "<div id='$index' class='button sidebarElement protein' data-logic='$id'><b>$name</b>" +
@@ -93,7 +92,7 @@
             this.currentLigand = molecule;
             this.scene.add( this.currentLigand );
         }
-    }
+    };
 
     MainScreen.prototype.setModel = function( type ) {
         var dataUrl;
@@ -107,7 +106,7 @@
 
         /* TODO - add to JSCommManager so errors and retries work */
         TextLoader.loadText( 'http://exscitech.gcl.cis.udel.edu/' + dataUrl, this.placeModel.bind(this) );
-    }
+    };
 
     MainScreen.prototype.setInfo = function( response ) {
         console.log( response );
@@ -140,29 +139,21 @@
         }
     };
 
-    MainScreen.prototype.changeSelected = function(type, id) {
-        for(var i = 0; i < this.buttonHistory.length; i++) {
-            if(this.buttonHistory[i].type == type) {
-                $(type + this.buttonHistory[i].id).removeClass('selected');
-                this.buttonHistory.splice(i, 1);
-                break;
-            }
+    MainScreen.prototype.setSelected = function ( type, newValue ) {
+        var index;
+        if( type == '#s' ) {
+            index = 0;
+        } else if( type == '#sp' ) {
+            index = 1;
+        } else {
+            index = 2;
         }
-        this.buttonHistory.push(
-                {
-                    type: type,
-                    id: id
-                }
-            );
-        $(type + id).addClass('selected');
-    };
 
-    MainScreen.prototype.reselect = function( type ) {
-        this.buttonHistory.forEach(function(history) {
-            if(type == history.type) {
-                $(type + history.id).addClass('selected');
-            }
-        });
+        if(this.selected[index] != -1) {
+            $(type + this.selected[index]).removeClass('selected');
+        }
+        this.selected[index] = newValue;
+        $(type + newValue).addClass('selected');
     };
 
     /* TODO: Keep private function here? */
@@ -189,27 +180,27 @@
         $('#sidebar').on('click', '.button[data-logic]', function() {
             var selected = $(this).data('logic');
             $('#sidebarPanel').addClass('right');
-            mainScreen.changeSelected('#s', selected);
-            mainScreen.selected[0] = parseInt(selected);
+            mainScreen.setSelected('#s', selected);
             mainScreen.setModel('protein');
         });
 
         $('#sidebarPanel').on('click', '.button[data-logic]', function() {
             var selected = $(this).data('logic');
-            mainScreen.changeSelected('#sp', selected);
-            mainScreen.selected[1] = selected;
+            mainScreen.setSelected('#sp', selected);
 
             $('#sidebarSecondPanel').html("<h2 class='sidebarTitle'>Conformation</h2>");
             var conformList = mainScreen.ligandList[selected].conformation_list;
             for(var i = 0; i < conformList.length; i++) {
                 insertInfo(
                     {
-                        '$index': 'ssp' + selected + "" + i,
-                        '$id': selected + "" + i, 
+                        '$index': 'ssp' + i,
+                        '$id': i, 
                         '$name': conformList[i].id
                     }, SIDEBAR_PANEL_HTML, '#sidebarSecondPanel');
             }
-            mainScreen.reselect('#ssp');
+            if(selected == mainScreen.selected[3]) { //if we are viewing the ligand page associated with the selected conformation
+                mainScreen.setSelected('#ssp', mainScreen.selected[2]);//then re-select
+            }
 
             $('#sidebarSecondPanel').removeClass('hidden');
             /* TODO - Better way to always move 202px from current margin-left? */
@@ -218,11 +209,11 @@
 
         $('#sidebarSecondPanel').on('click', '.button[data-logic]', function() {
             var selected = $(this).data('logic');
-            mainScreen.changeSelected('#ssp', selected);
             $('#sidebarSecondPanel').removeClass('furtherRight');
             $('#sidebarSecondPanel').addClass('hidden');
             $('#sidebarPanel').removeClass('right');
-            mainScreen.selected[2] = (selected + "").substr(1, 1);
+            mainScreen.setSelected('#ssp', selected);
+            mainScreen.selected[3] = mainScreen.selected[1];//make this ligand associated with the current conformation
             mainScreen.setModel('ligand');
         });
     }
