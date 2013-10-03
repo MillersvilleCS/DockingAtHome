@@ -104,8 +104,8 @@
             dataUrl = this.ligandList[ this.selected[1] ].conformation_list[ this.selected[2] ].pdb_url;
         }
 
-        /* TODO - add to JSCommManager so errors and retries work */
-        TextLoader.loadText( 'http://exscitech.gcl.cis.udel.edu/' + dataUrl, this.placeModel.bind(this) );
+        //TextLoader.loadText( 'http://exscitech.gcl.cis.udel.edu/' + dataUrl, this.placeModel.bind(this) );
+        JSCommunicationManager.get( dataUrl, this.placeModel.bind(this) );
     };
 
     MainScreen.prototype.setInfo = function( response ) {
@@ -216,10 +216,17 @@
             mainScreen.selected[3] = mainScreen.selected[1];//make this ligand associated with the current conformation
             mainScreen.setModel('ligand');
         });
+
+        $('#mainUI').find('.button[data-logic=\'submitJob\']').on('click', function() {
+            /* TODO */
+        });
     }
 
     function disableButtons( ) {
-
+        $('#sidebar').off('click');
+        $('#sidebarPanel').off('click');
+        $('#sidebarSecondPanel').off('click');
+        $('#mainUI').off('click');
     }
 
     window.MainScreen = MainScreen;

@@ -3,7 +3,7 @@ JSCommunicationManager = function () {
 };
 
 JSCommunicationManager.REQUEST_HANDLER_URL = 'http://docktest.gcl.cis.udel.edu/jobSubmission/public_html/request_handler.php';
-JSCommunicationManager.GET_MEDIA_URL = 'http://docktest.gcl.cis.udel.edu/exscitech_sam/get_media.php';
+JSCommunicationManager.MEDIA_URL = 'http://exscitech.gcl.cis.udel.edu/';
 JSCommunicationManager.MEDIA_PDB = 0;
 JSCommunicationManager.MEDIA_IMAGE = 1;
 JSCommunicationManager.errorCallback = undefined;
@@ -65,14 +65,11 @@ JSCommunicationManager.submitJob = function ( authenticator, sessionID, jobParam
     CommunicationManager.post ( JSCommunicationManager.REQUEST_HANDLER_URL, requestObject, callback );
 };
 
-JSCommunicationManager.getMedia = function ( gameSessionID, mediaType, questionID, callback ) {
+JSCommunicationManager.get = function ( subUrl, callback ) {
     'use strict';
     var requestObject = {};
-    requestObject.gsi = gameSessionID;
-    requestObject.mt = mediaType;
-    requestObject.qid = questionID;
 
-    CommunicationManager.get ( JSCommunicationManager.GET_MEDIA_URL, requestObject, callback );
+    CommunicationManager.get ( JSCommunicationManager.MEDIA_URL + subUrl, requestObject, callback );
 };
 
 JSCommunicationManager.error = function ( info ) {
