@@ -246,7 +246,7 @@
                 var z = parseFloat(lines[i].substr(46, 7));
 
                 //grab element type
-                e = trim(lines[i].substr(76, 2)).toLowerCase();
+                var e = trim(lines[i].substr(76, 2)).toLowerCase();
 
                 if(e === '')
                     e = trim(lines[i].substr(12, 2))
