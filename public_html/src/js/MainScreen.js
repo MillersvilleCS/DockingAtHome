@@ -56,6 +56,7 @@
 
     MainScreen.prototype.onLeave = function( ) {
         disableButtons( );
+        $('#mainUI').removeClass('in active');
     };
 
     MainScreen.prototype.onResume = function( ) {
@@ -66,7 +67,6 @@
     };
 
     MainScreen.prototype.placeModel = function ( response ) {
-        console.log(response);
         var molecule = MoleculeGeometryBuilder.load(response, 0.25, 5, 1, 0);
         if( molecule != undefined ) {
             molecule.position = new THREE.Vector3(-1, -1, 0);
@@ -100,7 +100,6 @@
         if( type == 'protein' ) {
             dataUrl = this.proteinList[ this.selected[0] ].pdb_url;
         } else {
-            console.log( this.ligandList[ this.selected[1] ].conformation_list[ this.selected[2] ] );
             dataUrl = this.ligandList[ this.selected[1] ].conformation_list[ this.selected[2] ].pdb_url;
         }
 
@@ -109,8 +108,6 @@
     };
 
     MainScreen.prototype.setInfo = function( response ) {
-        console.log( response );
-
         this.proteinList = response.protein_list;
         this.ligandList = response.ligand_list;
         UserData.session = response.session_id;
@@ -218,7 +215,10 @@
         });
 
         $('#mainUI').find('.button[data-logic=\'submitJob\']').on('click', function() {
-            /* TODO */
+            /* TODO - Do Submission */
+
+            //if success
+            mainScreen.$element.trigger(new ScreenChangeEvent('result'));
         });
     }
 

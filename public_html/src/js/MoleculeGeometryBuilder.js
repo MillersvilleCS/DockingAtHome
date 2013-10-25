@@ -142,7 +142,7 @@
         'default': 1.5
     };
     
-     this.Nucleotides = ['  G', '  A', '  T', '  C', '  U', ' DG', ' DA', ' DT', ' DC', ' DU'];
+    var nucleotides = ['  G', '  A', '  T', '  C', '  U', ' DG', ' DA', ' DT', ' DC', ' DU'];
 
     function trim(text) {
         return text.replace(/^\s\s*/, '').replace(/\s\s*$/, '');

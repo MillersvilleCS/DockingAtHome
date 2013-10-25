@@ -19,18 +19,25 @@
 
     ResultScreen.prototype.onLeave = function( ) {
         disableButtons( );
+        $('#resultUI').removeClass('in active');
     };
 
     ResultScreen.prototype.onResume = function( ) {
         enableButtons(this);
+        $('#resultUI').addClass('in active');
     };
 
     function enableButtons(resultScreen) {
+        $('#resultUI').find('.button[data-logic=\'submitAgain\']').on('click', function() {
+            /* TODO - Do Submission */
 
+            //if success
+            resultScreen.$element.trigger(new ScreenChangeEvent('main'));
+        });
     }
 
     function disableButtons( ) {
-
+        $('#resultUI').off('click');
     }
 
     window.ResultScreen = ResultScreen;
