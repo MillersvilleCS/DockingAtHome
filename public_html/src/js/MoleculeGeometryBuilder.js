@@ -408,26 +408,58 @@
             }
         }
 
-        function createBondsAsLines(bonds, lineWidth, model) {
+        function createBondsAsLines(bonds, lineWidth, distanceApart, model) {
             var bondGeometry = new THREE.Geometry( );
             for(var i = 0; i < bonds.length; i++) {
                 var bond = bonds[ i ];
 
                 var start = bond[ 0 ];
                 var end = bond[ 1 ];
-
+                var num = bond[2];
 
                 var vertex1 = bondInfo.vertices[ start ];
                 var vertex2 = bondInfo.vertices[ end ];
-
+                
                 var color1 = bondInfo.colors[ start ];
-                var color2 = bondInfo.colors[ end ];
+                var color2 = bondInfo.colors[ end ];               
+                
+                
+                switch(num) {
+                    case 3:
+                        bondGeometry.vertices.push(vertex1.clone());//sub
+                        bondGeometry.vertices.push(vertex2.clone());//sub
+                        bondGeometry.vertices.push(vertex1.clone());
+                        bondGeometry.vertices.push(vertex2.clone());
+                        bondGeometry.vertices.push(vertex1.clone());//add
+                        bondGeometry.vertices.push(vertex2.clone());//add
+        
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                        break;
+                    case 2:
+                        bondGeometry.vertices.push(vertex1.clone());//sub
+                        bondGeometry.vertices.push(vertex2.clone());//sub
+                        bondGeometry.vertices.push(vertex1.clone());//add
+                        bondGeometry.vertices.push(vertex2.clone());//add
+        
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                        break;
+                    default:
+                        bondGeometry.vertices.push(vertex1.clone());
+                        bondGeometry.vertices.push(vertex2.clone());
+        
+                        bondGeometry.colors.push(color1.clone());
+                        bondGeometry.colors.push(color2.clone());
+                }
 
-                bondGeometry.vertices.push(vertex1.clone());
-                bondGeometry.vertices.push(vertex2.clone());
-
-                bondGeometry.colors.push(color1.clone());
-                bondGeometry.colors.push(color2.clone());
+                
 
             }
 
