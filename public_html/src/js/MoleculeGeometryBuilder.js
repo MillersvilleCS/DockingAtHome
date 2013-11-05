@@ -234,7 +234,7 @@
 
         var atoms = [];
         var bonds = [];
-        protein = {sheet: [], helix: [], biomtChains: '', biomtMatrices: [], symMat: [], pdbID: '', title: ''}
+        protein = {sheet: [], helix: [], biomtChains: '', biomtMatrices: [], symMat: [], pdbID: '', title: ''};
         
         var histogram = {
         };

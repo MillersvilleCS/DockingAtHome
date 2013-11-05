@@ -9,27 +9,6 @@
         pointLight.position.set(0, 0, 130);
         this.scene.add(pointLight);
 
-        /* TODO - Remove Temp */
-        /*
-
-        var sphereMaterial =
-          new THREE.MeshLambertMaterial(
-            {
-              color: 0xCC0000
-            });
-
-        var sphere = new THREE.Mesh(
-
-          new THREE.SphereGeometry(
-            1,
-            20,
-            20),
-
-          sphereMaterial);
-
-        this.scene.add(sphere);
-        */
-
         this.proteinList = undefined;
         this.ligandList = undefined;
         this.currentProtein = undefined;
@@ -97,14 +76,21 @@
     MainScreen.prototype.setModel = function( type ) {
         var dataUrl;
         this.currentTypePlaced = type;
+        /* - Hardcoding Demo
         if( type == 'protein' ) {
             dataUrl = this.proteinList[ this.selected[0] ].pdb_url;
         } else {
             dataUrl = this.ligandList[ this.selected[1] ].conformation_list[ this.selected[2] ].pdb_url;
         }
 
-        //TextLoader.loadText( 'http://exscitech.gcl.cis.udel.edu/' + dataUrl, this.placeModel.bind(this) );
         JSCommunicationManager.get( dataUrl, this.placeModel.bind(this) );
+        */
+        if(type == 'protein') {
+            TextLoader.loadText( 'res/tempMolecules/1AJX.pdb', this.placeModel.bind(this) );
+        } else {
+            TextLoader.loadText( 'res/tempMolecules/CID_444290.sdf', this.placeModel.bind(this) );
+        }
+        
     };
 
     MainScreen.prototype.setInfo = function( response ) {
